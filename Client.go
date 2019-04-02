@@ -3,7 +3,7 @@ package main
 import "net"
 import "fmt"
 import "bufio"
-import "os"
+//import "os"
 
 func main() {
 
@@ -12,26 +12,41 @@ func main() {
     for {   
     
     // will listen for message to process ending in newline (\n)
-    messaget, _ := bufio.NewReader(conn).ReadString('\n')
+    
+    command, _ ,_:= bufio.NewReader(conn).ReadRune()
+    //messaget, _ := bufio.NewReader(conn).ReadString(' ')
+    
     // output message received
-    fmt.Print("Message Received:", string(messaget))    
+    fmt.Print("Command Received: ")    
 
-    switch messaget {
-    case "1":
-      fmt.Println("1 Key Pressed")
+   
+    switch command {
+    case '1':
+      fmt.Println("teste1")
+      fmt.Fprintf(conn, "true" + "\n")
       break
-    case "2":
-      fmt.Println("2 Key Pressed")
+    case '2':
+      fmt.Println("teste2")
+      fmt.Fprintf(conn, "true" + "\n")
       break
+    case '3':
+      fmt.Println("teste3")
+      fmt.Fprintf(conn, "true" + "\n")
+      break
+    default:
+      fmt.Println("Command undefined")   
+      fmt.Fprintf(conn, "false" + "\n")
+    break
     }
 
-
+    /*
     // read in input from stdin
     reader := bufio.NewReader(os.Stdin)
     fmt.Print("Text to send: ")
     text, _ := reader.ReadString('\n')
     // send to socket
     fmt.Fprintf(conn, text + "\n")
+  */
   }
 
  
